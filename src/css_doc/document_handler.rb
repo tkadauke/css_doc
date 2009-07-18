@@ -10,7 +10,7 @@ module CSSDoc
     end
 
     def comment(comment)
-      if comment =~ /@file|@note/
+      if comment =~ /@file/
         @document.documentation = DocumentDocumentation.new(comment)
       elsif comment =~ /@section/
         @document.sections << Section.new(@document, comment)

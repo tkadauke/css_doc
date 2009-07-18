@@ -1,6 +1,6 @@
 module CSSDoc
   class DocumentDocumentation < Documentation
-    attr_accessor :note, :appdef, :link, :copyright, :author, :css_for, :version
+    attr_accessor :file, :note, :appdef, :link, :copyright, :author, :css_for, :version
   
     def parse(lines)
       section_text = []
@@ -13,7 +13,7 @@ module CSSDoc
     end
     
     def one_liners
-      ['note', 'appdef', 'link', 'copyright', 'author', 'css-for', 'version']
+      ['file', 'note', 'appdef', 'link', 'copyright', 'author', 'css-for', 'version']
     end
   end
 end
