@@ -81,15 +81,25 @@ blockquote, q {
 * @section Typography
 */
 
+/**
+* A font size of 100.01% on the html tag makes it possible to easily convert
+* em's to pixels with default font size settings in all major browsers.
+*/
 html {
   font-size: 100.01%;
 }
 
+/**
+* Reset font size so that 1 em is 10 pixels.
+*/
 body {
   font-size: 62.5%;
   font-family: Arial, Verdana, Tahoma, 'Bitstream Vera Sans', sans serif;
 }
 
+/**
+* Set font size and spacing.
+*/
 #canvas {
   font-size: 1.2em;
   line-height: 1.3;
@@ -103,6 +113,9 @@ p {
 * @section Headers
 */
 
+/**
+* All headers use the same font, same margins, but different font sizes.
+*/
 h1, h2, h3, h4, h5, h6                      { font-family: 'Arial', sans serif; font-weight: normal; line-height: 1; margin: 0 0 .5em 0; padding: 0; }
 h1                                          { font-size: 1.9em; }
 h2                                          { font-size: 1.8333333em; }
@@ -123,6 +136,9 @@ body {
   margin-left: 15em;
 }
 
+/**
+* Push navigation to the left-hand side.
+*/
 .navigation {
   float: left;
   width: 9em;
@@ -140,6 +156,10 @@ dt {
   font-weight: bold;
 }
 
+/**
+* Use nice indentation to make definition items more distinguishable from the
+* terms.
+*/
 dd {
   padding-left: 2em;
 }
@@ -148,18 +168,30 @@ dd {
 * @section Indexes
 */
 
+/**
+* Index list items should be next to each other.
+*/
 dl.index ul li {
   display: inline;
 }
 
+/**
+* Separate index list items by commas via CSS.
+*/
 dl.index ul li:after {
   content: ', ';
 }
 
+/**
+* No comma for the last index list item.
+*/
 dl.index ul li:last-child:after {
   content: '';
 }
 
+/**
+* Actually use bullets for the file index.
+*/
 ul.file-index {
   list-style-type: disc;
 }
@@ -176,18 +208,31 @@ ul.rule-sets, ul.sections {
   margin-bottom: 0.5em;
 }
 
+/**
+* Like index lists, the table of contents lists on the document page should be
+* inlined.
+*/
 ul.sections li, ul.rule-sets li {
   display: inline;
 }
 
+/**
+* Again, use CSS-generated commas to separate the items.
+*/
 ul.sections li:after, ul.rule-sets li:after {
   content: ', ';
 }
 
+/**
+* No comma for the last one.
+*/
 ul.sections li:last-child:after, ul.rule-sets li:last-child:after {
   content: '';
 }
 
+/**
+* Give section headers a visual emphasis.
+*/
 h3.section {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -195,6 +240,11 @@ h3.section {
   margin-bottom: 1em;
 }
 
+/**
+* Examples are surrounded by a thick border. Also there is a rather large
+* padding to make it clear where the example starts. This selector is the
+* namespace for generated CSS, which is used to style the example in the box.
+*/
 div.example {
   margin: 1em 0 1em 2em;
   border: 2px solid #000;
@@ -212,4 +262,16 @@ ul.navigation li {
 
 ul.navigation li:last-child {
   border-bottom: 1px solid #000;
+}
+
+/**
+* @section Footer
+*/
+
+/**
+* Center footer line.
+*/
+#footer {
+  margin-top: 2em;
+  text-align: center;
 }
