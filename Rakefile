@@ -1,6 +1,7 @@
 require 'rubygems'
 Gem::manage_gems
 require 'rake/gempackagetask'
+require 'rake/rdoctask'
 require 'active_support'
 
 gem_name = 'css_doc'
@@ -28,6 +29,15 @@ end
 desc "Install gem locally"
 task :install => :default do
   system "gem install #{package}"
+end
+
+desc "Generate documentation for #{gem_name}."
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = gem_name
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README.rdoc')
+  rdoc.rdoc_files.include('src/**/*.rb')
 end
 
 desc "Generate .gemspec file from .gemspec.erb file"

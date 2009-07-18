@@ -1,0 +1,184 @@
+= css_doc
+
+Author::    Thomas Kadauke - tkadauke (at) imedo.de
+Copyright:: Copyright (c) 2009 imedo GmbH
+Licence::   MIT
+Git::       http://github.com/imedo/css_doc
+Bugs::      No dedicated bug tracker yet - Email us or just send pull requests 
+
+css_doc is a Ruby library and command line tool to extract documentation from CSS files. The format of the documentation is very similar to JavaDoc.
+
+css_doc was inspired by the CSSDOC[http://cssdoc.net/] project, but it is NOT a complete implementation of the proposed standard, although it should be fairly compatible. As there is no documentation extractor for the CSSDOC standard, this project should fill the gap for many people.
+
+Features:
+
+* Extracts file-scope documentation for each CSS source file.
+* Extracts documentation for rule sets (i.e. a set of selectors separated by commas with a declaration).
+* Files can be separated into several sections.
+* For rule set documentation, html code examples can be incorporated into the documentation.
+* Generates selector, section and file index pages.
+
+As an Example, consider the famous reset style sheet, documented with css_doc:
+
+  /**
+  * @file reset.css
+  * @author Eric Meyer, documented by Thomas Kadauke
+  * @css-for IE 5, IE 6, IE 7, IE 8, Safari 3, Safari 4, Firefox 2, Firefox 3
+  */
+
+  /**
+  * @section Reset styles
+  * These styles reset the default style sheet that comes with the user agent.
+  */
+
+  /**
+  * Set margins and paddings to 0, and font-properties to a default value.
+  */
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, font, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+  }
+  /**
+  * Reset focus styles to nothing.
+  * Remember to define focus styles in after this declaration.
+  */
+  :focus {
+    outline: 0;
+  }
+  /**
+  * Reset text color and line height.
+  */
+  body {
+    line-height: 1;
+    color: black;
+    background: white;
+  }
+  /**
+  * Remove default list decoration.
+  */
+  ol, ul {
+    list-style: none;
+  }
+  /*
+  * Remove default table styling.
+  * Tables still need 'cellspacing="0"' in the markup.
+  */
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  /**
+  * Reset text alignment and typography for special tags.
+  */
+  caption, th, td {
+    text-align: left;
+    font-weight: normal;
+  }
+  /**
+  * Remove CSS generated content around citation tags.
+  */
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: "";
+  }
+  blockquote, q {
+    quotes: "" "";
+  }
+
+== Dependencies
+
+* CSSPool > 2.0.0 (http://github.com/tenderlove/csspool)
+* Patched version of libcroco-0.6.2, see below
+
+== Installation
+
+The easiest way to install this gem is directly via the github gem 
+repository:
+
+ $ sudo gem install imedo-css_doc -s http://gems.github.com
+
+For css_doc to work, you need the latest version of CSSPool (2.0.0). CSSPool depends on libcroco, which can be installed on OS X via
+
+ $ sudo port install libcroco
+
+Unfortunately, at the time of this writing, libcroco contains a bug, which is essential to css_doc: it does not parse comments, but instead it simply ignores them. The libcroco authors have already been notified of this bug, and will hopefully release a fixed version soon.
+
+To make things work, download a copy of libcroco from
+
+  http://ftp.gnome.org/pub/gnome/sources/libcroco/0.6/
+  
+(preferably version 0.6.2), and add the following lines to src/cr-parser.c, line 630, between "do { if (token) {" and "cr_token_destroy(token)":
+
+  if (token->type == COMMENT_TK && PRIVATE (a_this)->sac_handler && PRIVATE (a_this)->sac_handler->comment) {
+      PRIVATE (a_this)->sac_handler->comment(PRIVATE (a_this)->sac_handler, token->u.str);
+  }
+
+Then, in the root directory of libcroco, compile using
+
+  $ ./configure
+  $ make
+
+You can use make install to install the library, but you can just as well set the environment variable LIBCROCO to
+
+  /path/to/libcroco/src/.libs/libcroco-0.6.dylib
+
+(on OS X), or
+
+  /path/to/libcroco/src/.libs/libcroco-0.6.so
+
+on other Unix systems.
+
+== Usage
+
+=== As command line client
+
+To get help, type
+
+ $ cssdoc --help
+
+The command line options are
+
+  -o, --output=dir                 Specify output directory
+  -s, --skip=files                 Skip specified files
+  -p, --project-name=name          Specify Project name
+  -v, --[no-]verbose               Run verbosely
+
+You can specifiy the input directory as an optional last parameter. The default is the current directory. For skipped files, a comma-separated list of file names relative to the input directory is expected. 
+
+=== In Rakefiles
+
+To define a rake task for css_doc, add the following to your Rakefile:
+
+  require 'rake/css_doc_task'
+
+  # only if libcroco is not found automatically
+  ENV['LIBCROCO'] = '/path/to/libcroco'
+
+  Rake::CSSDocTask.new('doc:css') do |task|
+    task.input_dir = 'public/stylesheets' # default
+    task.output_dir = 'css_doc' # default
+
+    task.project_name = 'my_project'
+    task.skip_files = ['base_packaged.css', 'print_packaged.css']
+    task.verbose = true
+  end
+
+== TODO
+
+* Implement more tags
+* Make default template pretty
+* Include more templates
