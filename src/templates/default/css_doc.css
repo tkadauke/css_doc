@@ -1,7 +1,17 @@
 /**
-* @section Reset styles
+* @file css_doc.css
+* @author Thomas Kadauke
+* @css-for Safari 4, Firefox 3
 */
 
+/**
+* @section Reset styles
+* These styles reset the default style sheet that comes with the user agent.
+*/
+
+/**
+* Set margins and paddings to 0, and font-properties to a default value.
+*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,27 +30,45 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   font-family: inherit;
   vertical-align: baseline;
 }
-/* remember to define focus styles! */
+/**
+* Reset focus styles to nothing.
+* Remember to define focus styles in after this declaration.
+*/
 :focus {
   outline: 0;
 }
+/**
+* Reset text color and line height.
+*/
 body {
   line-height: 1;
   color: black;
   background: white;
 }
+/**
+* Remove default list decoration.
+*/
 ol, ul {
   list-style: none;
 }
-/* tables still need 'cellspacing="0"' in the markup */
+/*
+* Remove default table styling.
+* Tables still need 'cellspacing="0"' in the markup.
+*/
 table {
   border-collapse: separate;
   border-spacing: 0;
 }
+/**
+* Reset text alignment and typography for special tags.
+*/
 caption, th, td {
   text-align: left;
   font-weight: normal;
 }
+/**
+* Remove CSS generated content around citation tags.
+*/
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: "";
