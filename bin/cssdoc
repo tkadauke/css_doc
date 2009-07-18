@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'css_doc'
+require 'optparse'
+
+class CSSDocCli
+  def self.run(args)
+    options = {
+      :input_dir => '.',
+      :skip_files => [],
+      :output_dir => 'doc'
+    }
+    OptionParser.new do |opts|
+      opts.banner = "Usage: cssdoc [options] [input-dir/input-files]"
+      opts.on("-o", "--output=dir", "Specify output directory") do |dir|
+        options[:output_dir] = dir
+      end
+      opts.on("-s", "--skip=files", "Skip specified files") do |files|
+        options[:skip_files] = files.split(',').collect { |file| file.strip }
+      end
+      opts.on("-p", "--project-name=name", "Specify Project name") do |name|
+        options[:project_name] = name
+      end
+      opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+        options[:verbose] = v
+      end
+    end
+    options[:input_dir] = ARGV.first if ARGV.first
+    
+    driver = CSSDoc::Driver.new
+    driver.run(options)
+  end
+end
+
+CSSDocCli.run(ARGV)

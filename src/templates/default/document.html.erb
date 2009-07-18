@@ -1,0 +1,85 @@
+<h1>Document <%= @document.name %></h1>
+<% if @document.documentation %>
+  <dl>
+    <% if @document.documentation.author %>
+      <dt>Author</dt>
+      <dd><%= @document.documentation.author %></dd>
+    <% end %>
+    <% if @document.documentation.appdef %>
+      <dt>Application</dt>
+      <dd><%= @document.documentation.appdef %></dd>
+    <% end %>
+    <% if @document.documentation.link %>
+      <dt>URL</dt>
+      <dd><%= @document.documentation.link %></dd>
+    <% end %>
+    <% if @document.documentation.copyright %>
+      <dt>Copyright</dt>
+      <dd><%= @document.documentation.copyright %></dd>
+    <% end %>
+    <% if @document.documentation.css_for %>
+      <dt>Compatible browsers</dt>
+      <dd><%= @document.documentation.css_for %></dd>
+    <% end %>
+    <% if @document.documentation.author %>
+      <dt>Version</dt>
+      <dd><%= @document.documentation.author %></dd>
+    <% end %>
+  </dl>
+  
+  <%= @document.documentation.sections.to_html %>
+<% end %>
+
+<h2>Contents</h2>
+
+<% unless @document.named_sections.empty? %>
+  <h3>Sections</h3>
+
+  <ul class="sections">
+    <% @document.named_sections.sort_by {|section| section.name}.each do |section| %>
+      <li><a href="#section-<%= section.object_id %>"><%= section.name %></a></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h3>Rule sets</h3>
+
+<ul class="rule-sets">
+  <% @document.rule_sets.sort_by {|set| set.selector_css}.each do |rule_set| %>
+    <li><a href="#rule-set-<%= rule_set.object_id %>" title="<%= rule_set.selector_css %>"><%= truncate(rule_set.selector_css, 40) %></a></li>
+  <% end %>
+</ul>
+
+<h2>Documentation</h2>
+
+<% @document.sections.each do |section| %>
+  <% if section.name %>
+    <h3 class="section" id="section-<%= section.object_id %>"><%= section.name %></h3>
+  <% end %>
+  
+  <%= section.documentation.sections.to_html %>
+  
+  <% section.rule_sets.each do |rule_set| %>
+    <h4 class="rule-set" id="rule-set-<%= rule_set.object_id %>">Rule set <%= rule_set.documentation.name || "(unnamed)" %></h4>
+
+    <dl>
+      <dt>Selectors</dt>
+      <dd><%= rule_set.selector_css %></dd>
+
+      <dt>Properties</dt>
+      <dd><%= rule_set.declaration_css %></dd>
+
+      <% if rule_set.documentation.formerly %>
+        <dt>Formerly</dt>
+        <dd><%= rule_set.documentation.formerly %></dd>
+      <% end %>
+      
+      <% if rule_set.documentation.deprecated %>
+        <dt>Deprecated</dt>
+        <dd><%= rule_set.documentation.deprecated %></dd>
+      <% end %>
+    </dl>
+
+    <%= rule_set.documentation.sections.to_html %>
+  <% end %>
+<% end %>
