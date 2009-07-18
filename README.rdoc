@@ -157,7 +157,11 @@ The command line options are
   -p, --project-name=name          Specify Project name
   -v, --[no-]verbose               Run verbosely
 
-You can specifiy the input directory as an optional last parameter. The default is the current directory. For skipped files, a comma-separated list of file names relative to the input directory is expected. 
+You can specifiy the input directory as an optional last parameter. The default is the current directory. For skipped files, a comma-separated list of file names relative to the input directory is expected.
+
+The default options usually work well. Just go to your repository root, and type
+
+ $ cssdoc
 
 === In Rakefiles
 
