@@ -14,9 +14,9 @@ module CSSDoc
     class TextSection < Section
       def to_html
         result = "<p>"
-        result << lines.collect {|l|l.strip}.join("\n").gsub(/\n\n+/, '</p><p>').gsub(/\n/, ' ')
+        result << lines.collect {|l|l.strip}.join("\n").gsub(/\n\n+/, '</p><p>').gsub(/\n/, ' ').strip
         result << "</p>"
-        result
+        result.gsub('<p></p>', '')
       end
     end
       
@@ -39,7 +39,7 @@ module CSSDoc
     def initialize(comment)
       @comment = comment
       @sections = Sections.new
-      parse_comment
+      parse_documentation
     end
     
     def to_s
@@ -62,12 +62,16 @@ module CSSDoc
     end
     
     def parse_comment
-      lines = comment.gsub(/\*\/$/, '').split("\n").collect { |line| line.gsub(/^\s*\*/, '') }
+      @parsed_comment ||= comment.gsub(/\*\/$/, '').split("\n").collect { |line| line.gsub(/^\s*\*/, '') }
+    end
+    
+    def parse_documentation
+      lines = parse_comment
       parse(lines)
     end
     
     def empty?
-      @comment.strip.empty?
+      parse_comment.join("\n").strip.empty?
     end
   
     def parse(lines)

@@ -13,7 +13,11 @@ module CSSDoc
     end
     
     def relative_root
-      (['..'] * File.dirname(@document.name).split('/').size).join('/')
+      if @document.name =~ /\//
+        (['..'] * File.dirname(@document.name).split('/').size).join('/')
+      else
+        '.'
+      end
     end
   end
 end

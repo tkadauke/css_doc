@@ -30,7 +30,7 @@ module CSSDoc
     
     def truncate(string, length)
       if string.size > length
-        string[0..(length - 3)] + '...'
+        string[0..(length - 4)] + '...'
       else
         string
       end

@@ -6,7 +6,7 @@ module CSSDoc
     
     def self.parse string, name
       unless string && string.length > 0
-        return CSSDoc::Document.new
+        return CSSDoc::Document.new(name)
       end
       handler = CSSDoc::DocumentHandler.new(name)
       parser = CSSPool::SAC::Parser.new(handler)

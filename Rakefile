@@ -2,6 +2,7 @@ require 'rubygems'
 Gem::manage_gems
 require 'rake/gempackagetask'
 require 'rake/rdoctask'
+require 'rake/testtask'
 require 'active_support'
 
 gem_name = 'css_doc'
@@ -12,10 +13,18 @@ Rake::GemPackageTask.new(spec) do |pkg|
 end
 
 desc 'Test the gem.'
-task :test do
-  Dir["test/*.rb"].each do |test|
-    puts `ruby #{test}`
-  end
+task :test => [:"test:units", :"test:functionals"]
+
+desc "Run unit tests for #{gem_name} gem."
+Rake::TestTask.new("test:units") do |t|
+  t.pattern = 'test/unit/**/*_test.rb'
+  t.verbose = true
+end
+
+desc "Run functional tests for #{gem_name} gem."
+Rake::TestTask.new("test:functionals") do |t|
+  t.pattern = 'test/functional/**/*_test.rb'
+  t.verbose = true
 end
 
 file_name = "#{gem_name}-#{spec.version}.gem"
