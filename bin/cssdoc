@@ -24,7 +24,7 @@ class CSSDocCli
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options[:verbose] = v
       end
-    end
+    end.parse!
     options[:input_dir] = ARGV.first if ARGV.first
     
     driver = CSSDoc::Driver.new
