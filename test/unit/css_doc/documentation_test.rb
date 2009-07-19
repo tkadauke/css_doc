@@ -55,23 +55,7 @@ end
 
 class CSSDoc::DocumentationTest < Test::Unit::TestCase
   class TestDocumentation < CSSDoc::Documentation
-    attr_accessor :test, :foo
-    
-    def parse(lines)
-      lines.each do |line|
-        parse_one_liners(line)
-      end
-    end
-    
-    def one_liners
-      ['test', 'foo']
-    end
-  end
-  
-  def test_should_raise_exception_when_initialized
-    assert_raise NotImplementedError do
-      CSSDoc::Documentation.new('/** some comment */')
-    end
+    define_tag :test, :foo
   end
   
   def test_should_return_original_comment_as_string
@@ -79,7 +63,7 @@ class CSSDoc::DocumentationTest < Test::Unit::TestCase
     assert_equal '/** some comment */', documentation.to_s
   end
   
-  def test_should_parse_one_liners
+  def test_should_parse_tags
     assert_equal 'hello', TestDocumentation.new('@test hello').test
     assert_equal 'hello', TestDocumentation.new("whats up \n* @test hello").test
     assert_equal 'bar', TestDocumentation.new("whats up \n* @test hello\n@foo bar").foo

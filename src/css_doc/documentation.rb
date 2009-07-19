@@ -36,6 +36,17 @@ module CSSDoc
     attr_accessor :comment
     attr_accessor :sections
     
+    def self.tags
+      @tags ||= []
+    end
+    
+    def self.define_tag(*names)
+      names.each do |name|
+        attr_accessor name
+        tags << name
+      end
+    end
+    
     def initialize(comment)
       @comment = comment
       @sections = Sections.new
@@ -46,19 +57,15 @@ module CSSDoc
       @comment
     end
     
-    def parse_one_liners(line)
-      one_liners.each do |one_liner|
-        rx = /@#{one_liner}/
+    def parse_tags(line)
+      self.class.tags.each do |tag|
+        rx = /@#{tag.to_s.gsub('_', '-')}/
         if line =~ rx
-          instance_variable_set(:"@#{one_liner.gsub('-', '_')}", line.gsub(rx, "").strip)
+          instance_variable_set(:"@#{tag}", line.gsub(rx, "").strip)
           return true
         end
       end
       return false
-    end
-    
-    def one_liners
-      []
     end
     
     def parse_comment
@@ -75,7 +82,26 @@ module CSSDoc
     end
   
     def parse(lines)
-      raise NotImplementedError
+      section_type = TextSection
+      section_text = []
+      lines.each do |line|
+        unless parse_tags(line)
+          if line =~ /@code/
+            sections << section_type.new(section_text)
+            section_text = []
+            section_type = CodeSection
+          elsif line =~ /@endcode/
+            sections << section_type.new(section_text)
+            section_text = []
+            section_type = TextSection
+          elsif line =~ /@description/
+            section_text << line.gsub(/@description/, '')
+          else
+            section_text << line
+          end
+        end
+      end
+      sections << section_type.new(section_text)
     end
   end
 end

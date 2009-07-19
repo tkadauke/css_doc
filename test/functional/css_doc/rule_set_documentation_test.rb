@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
 class CSSDoc::RuleSetDocumentationTest < Test::Unit::TestCase
-  def test_should_parse_one_liners
+  def test_should_parse_tags
     comment = <<-end
       * @name Cool rule set
       * @formerly Really cool rule set
