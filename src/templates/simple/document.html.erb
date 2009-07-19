@@ -30,11 +30,9 @@
   <%= @document.documentation.sections.to_html %>
 <% end %>
 
-<h2>Documentation</h2>
-
 <% @document.sections.each do |section| %>
   <% if section.name %>
-    <h3 class="section" id="section-<%= section.object_id %>"><%= section.name %></h3>
+    <h2 class="section" id="section-<%= section.object_id %>"><%= section.name %></h2>
   <% end %>
   
   <%= section.documentation.sections.to_html %>

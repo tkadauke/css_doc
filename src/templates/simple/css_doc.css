@@ -251,7 +251,7 @@ ul.sections li:last-child:after, ul.rule-sets li:last-child:after {
 /**
 * Give section headers a visual emphasis.
 */
-h3.section {
+h2.section {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
   margin-top: 1em;
