@@ -2,7 +2,7 @@
   * support for file lists
 
 * implement more tags
-  * @code tags on file and section level
+  * <i>@code tags on file and section level</i> (done)
   * @see for references
   * @hack
   * @valid
@@ -17,6 +17,7 @@
   * @tested
   * @todo
   * @workaround
+* rewrite css url() parameters to correctly point to assets
 * index page support
   * maybe sub page support?
 * nicer default template
@@ -29,11 +30,12 @@
   * colors
   * font face
   * font size (maybe via tooltip)
-* highlighting of tags
+* highlighting of tag information
   * Browser names (maybe use their logos)
 * more index lists
   * package list
   * hack list
   * invalid list
   * browser specific rule set list
+  * example index
   * supported browsers list (browser names should be parsed in a smart fashion, ie5 = ie 5 = IE5 = IE 5 = Internet Explorer 5 € all IEs or IE or ie5-7 or ie 5 - 7)
