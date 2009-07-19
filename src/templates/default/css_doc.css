@@ -114,6 +114,8 @@ p {
 */
 pre {
   font-family: Courier;
+  width: 100%;
+  overflow: auto;
 }
 
 /**
