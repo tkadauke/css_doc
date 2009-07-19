@@ -12,7 +12,7 @@ module CSSDoc
     end
     
     def generate_file_documentation
-      skip_files = @options[:skip_files]
+      skip_files = @options[:skip_files] || []
       
       Dir.glob("#{@options[:input_dir]}/**/*.css").each do |file_name|
         relative_path = file_name.gsub("#{@options[:input_dir]}/", '')
