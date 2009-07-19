@@ -1,0 +1,39 @@
+* command line
+** support for file lists
+
+* implement more tags
+** @code tags on file and section level
+** @see for references
+** @hack
+** @valid
+** @tags for tag clouds
+** @affected
+** @bugfix
+** @colordef
+** @license
+** @media? or parse this from css?
+** @package
+** @since
+** @tested
+** @todo
+** @workaround
+* index page support
+** maybe sub page support?
+* nicer default template
+* support for more templates
+** more templates
+** specify template path for custom templates
+* textile, markdown or something else (or both?)
+* syntax highlighting in code examples?
+* highlighting of css properties:
+** colors
+** font face
+** font size (maybe via tooltip)
+* highlighting of tags
+** Browser names (maybe use their logos)
+* more index lists
+** package list
+** hack list
+** invalid list
+** browser specific rule set list
+** supported browsers list (browser names should be parsed in a smart fashion, ie5 = ie 5 = IE5 = IE 5 = Internet Explorer 5 € all IEs or IE or ie5-7 or ie 5 - 7)
