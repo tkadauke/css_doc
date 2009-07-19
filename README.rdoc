@@ -10,7 +10,7 @@ css_doc is a Ruby library and command line tool to extract documentation from CS
 
 css_doc was inspired by the CSSDOC[http://cssdoc.net/] project, but it is NOT a complete implementation of the proposed standard, although it should be fairly compatible. As there is no documentation extractor for the CSSDOC standard, this project should fill the gap for many people.
 
-Features:
+== Features
 
 * Extracts file-scope documentation for each CSS source file.
 * Extracts documentation for rule sets (i.e. a set of selectors separated by commas with a declaration).
@@ -18,7 +18,11 @@ Features:
 * For rule set documentation, html code examples can be incorporated into the documentation.
 * Generates selector, section and file index pages.
 
-As an Example, consider the famous reset style sheet, documented with css_doc:
+== What does it look like?
+
+Here you can find an example of a generated documentation: http://opensource.imedo.de/css_doc/index.html. This is the documentation for the stylesheet[http://opensource.imedo.de/stylesheets/style.css] that we use for our opensource site.
+
+As another Example, consider the famous reset style sheet, documented with css_doc:
 
   /**
   * @file reset.css
