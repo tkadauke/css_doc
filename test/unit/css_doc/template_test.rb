@@ -5,16 +5,13 @@ class CSSDoc::TemplateTest < Test::Unit::TestCase
     def initialize(options = {})
       super
     end
-    def template_name
-      'test'
-    end
   end
   
   def test_should_render_template_and_layout
     File.expects(:read).returns('').twice
     2.times { ERB.expects(:new).returns(mock(:result)) }
     template = TestTemplate.new
-    template.render
+    template.render('test')
   end
   
   def test_should_have_no_title
@@ -23,7 +20,7 @@ class CSSDoc::TemplateTest < Test::Unit::TestCase
   
   def test_should_read_template
     File.expects(:read).with(regexp_matches(/test.html.erb/))
-    TestTemplate.new.template
+    TestTemplate.new.template('test')
   end
   
   def test_should_read_layout

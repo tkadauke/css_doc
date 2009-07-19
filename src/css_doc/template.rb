@@ -7,9 +7,16 @@ module CSSDoc
     def initialize(options = {})
       @options = options
     end
+    
+    class Evaluator
+      
+    end
 
-    def render
-      content = ERB.new(template).result(binding)
+    def render(name, variables = {})
+      variables.each do |key, value|
+        instance_variable_set(:"@#{key}", value)
+      end
+      content = ERB.new(template(name)).result(binding)
       ERB.new(layout).result(binding)
     end
     
@@ -21,7 +28,7 @@ module CSSDoc
       @options[:template_path] || @@default_template_path
     end
     
-    def template
+    def template(template_name)
       File.read("#{template_path}/#{template_name}.html.erb")
     end
     
@@ -30,7 +37,7 @@ module CSSDoc
     end
     
     def relative_root
-      "."
+      @options[:relative_root] || "."
     end
     
     def truncate(string, length)

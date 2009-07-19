@@ -22,8 +22,11 @@ module CSSDoc
 
         FileUtils.mkdir_p("#{@options[:output_dir]}/#{File.dirname(relative_path)}")
         doc = CSSDoc::Document.parse(File.read(file_name), relative_path)
+        
+        relative_root = '.'
+        relative_root = (['..'] * File.dirname(doc.name).split('/').size).join('/') if doc.name =~ /\//
 
-        html = CSSDoc::DocumentTemplate.new(doc, @options).render
+        html = CSSDoc::Template.new(@options.merge(:relative_root => relative_root)).render('document', :document => doc, :title => doc.name)
         File.open("#{@options[:output_dir]}/#{doc.output_file_name}", 'w') { |file| file.puts html }
 
         @collection.documents << doc
@@ -33,22 +36,22 @@ module CSSDoc
     def generate_index_documentation
       log "Generating Selector Index ..."
 
-      html = CSSDoc::SelectorIndexTemplate.new(@collection, @options).render
+      html = CSSDoc::Template.new(@options).render('selector_index', :collection => @collection, :title => 'Selector Index')
       File.open("#{@options[:output_dir]}/selector_index.html", 'w') { |file| file.puts html }
 
       log "Generating File Index ..."
 
-      html = CSSDoc::FileIndexTemplate.new(@collection, @options).render
+      html = CSSDoc::Template.new(@options).render('file_index', :collection => @collection, :title => 'File Index')
       File.open("#{@options[:output_dir]}/file_index.html", 'w') { |file| file.puts html }
 
       log "Generating Section Index ..."
 
-      html = CSSDoc::SectionIndexTemplate.new(@collection, @options).render
+      html = CSSDoc::Template.new(@options).render('section_index', :collection => @collection, :title => 'Section Index')
       File.open("#{@options[:output_dir]}/section_index.html", 'w') { |file| file.puts html }
 
       log "Generating Index Page ..."
 
-      html = CSSDoc::IndexTemplate.new(@options).render
+      html = CSSDoc::Template.new(@options).render('index', :project_name => @options[:project_name], :title => 'Index')
       File.open("#{@options[:output_dir]}/index.html", 'w') { |file| file.puts html }
     end
     
