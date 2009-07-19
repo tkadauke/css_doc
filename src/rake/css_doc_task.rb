@@ -10,6 +10,7 @@ module Rake
       @name = name
       @input_dir = 'public/stylesheets'
       @output_dir = 'css_doc'
+      @template_path = File.expand_path(File.dirname(__FILE__) + '/../templates/default')
 
       yield self if block_given?
       define

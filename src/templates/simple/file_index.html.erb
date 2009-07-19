@@ -1,0 +1,7 @@
+<h1>File Index</h1>
+
+<ul class="file-index">
+  <% @collection.documents.sort_by {|doc| doc.name}.each do |document| %>
+    <li><a href="<%= document.output_file_name %>"><%= document.name %></a></li>
+  <% end %>
+</ul>

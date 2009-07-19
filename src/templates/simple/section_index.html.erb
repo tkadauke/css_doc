@@ -1,0 +1,14 @@
+<h1>Section Index</h1>
+
+<dl class="index">
+  <% @collection.section_hash.sort.each do |name, sections| %>
+    <dt><%= name %></dt>
+    <dd>
+      <ul>
+        <% sections.each do |section| %>
+          <li><a href="<%= section.document.output_file_name %>#section-<%= section.object_id %>"><%= section.document.name %></a></li>
+        <% end %>
+      </ul>
+    </dd>
+  <% end %>
+</dt>

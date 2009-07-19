@@ -23,7 +23,7 @@ module CSSDoc
         FileUtils.mkdir_p("#{@options[:output_dir]}/#{File.dirname(relative_path)}")
         doc = CSSDoc::Document.parse(File.read(file_name), relative_path)
 
-        html = CSSDoc::DocumentTemplate.new(doc).render
+        html = CSSDoc::DocumentTemplate.new(doc, @options).render
         File.open("#{@options[:output_dir]}/#{doc.output_file_name}", 'w') { |file| file.puts html }
 
         @collection.documents << doc
@@ -33,17 +33,17 @@ module CSSDoc
     def generate_index_documentation
       log "Generating Selector Index ..."
 
-      html = CSSDoc::SelectorIndexTemplate.new(@collection).render
+      html = CSSDoc::SelectorIndexTemplate.new(@collection, @options).render
       File.open("#{@options[:output_dir]}/selector_index.html", 'w') { |file| file.puts html }
 
       log "Generating File Index ..."
 
-      html = CSSDoc::FileIndexTemplate.new(@collection).render
+      html = CSSDoc::FileIndexTemplate.new(@collection, @options).render
       File.open("#{@options[:output_dir]}/file_index.html", 'w') { |file| file.puts html }
 
       log "Generating Section Index ..."
 
-      html = CSSDoc::SectionIndexTemplate.new(@collection).render
+      html = CSSDoc::SectionIndexTemplate.new(@collection, @options).render
       File.open("#{@options[:output_dir]}/section_index.html", 'w') { |file| file.puts html }
 
       log "Generating Index Page ..."
@@ -62,7 +62,7 @@ module CSSDoc
     def copy_additional_files
       log "Copying Additional Files ..."
 
-      FileUtils.cp(File.dirname(__FILE__) + '/../templates/default/css_doc.css', "#{@options[:output_dir]}/")
+      FileUtils.cp("#{@options[:template_path]}/css_doc.css", "#{@options[:output_dir]}/")
     end
     
     def log(string)

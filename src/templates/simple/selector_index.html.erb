@@ -1,0 +1,14 @@
+<h1>Selector Index</h1>
+
+<dl class="index">
+  <% @collection.selector_hash.sort.each do |name, selectors| %>
+    <dt><%= name %></dt>
+    <dd>
+      <ul>
+        <% selectors.each do |selector| %>
+          <li><a href="<%= selector.rule_set.document.output_file_name %>#rule-set-<%= selector.rule_set.object_id %>"><%= selector.rule_set.document.name %></a></li>
+        <% end %>
+      </ul>
+    </dd>
+  <% end %>
+</dt>

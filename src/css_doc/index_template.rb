@@ -1,6 +1,7 @@
 module CSSDoc
   class IndexTemplate < Template
     def initialize(options)
+      super
       @project_name = options[:project_name]
     end
     

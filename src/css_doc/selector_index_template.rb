@@ -1,6 +1,7 @@
 module CSSDoc
   class SelectorIndexTemplate < Template
-    def initialize(collection)
+    def initialize(collection, options = {})
+      super(options)
       @collection = collection
     end
 

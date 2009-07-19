@@ -2,6 +2,9 @@ require File.dirname(__FILE__) + "/../test_helper"
 
 class CSSDoc::TemplateTest < Test::Unit::TestCase
   class TestTemplate < CSSDoc::Template
+    def initialize(options = {})
+      super
+    end
     def template_name
       'test'
     end
@@ -26,6 +29,16 @@ class CSSDoc::TemplateTest < Test::Unit::TestCase
   def test_should_read_layout
     File.expects(:read).with(regexp_matches(/layout.html.erb/))
     TestTemplate.new.layout
+  end
+  
+  def test_should_use_default_template_if_none_specified
+    File.expects(:read).with(regexp_matches(/default/))
+    TestTemplate.new.layout
+  end
+  
+  def test_should_support_custom_templates
+    File.expects(:read).with(regexp_matches(/my_own_template/))
+    TestTemplate.new(:template_path => 'my_own_template').layout
   end
   
   def test_should_return_relative_root

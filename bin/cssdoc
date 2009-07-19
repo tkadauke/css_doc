@@ -8,7 +8,8 @@ class CSSDocCli
     options = {
       :input_dir => '.',
       :skip_files => [],
-      :output_dir => 'doc'
+      :output_dir => 'doc',
+      :template_path => File.expand_path(File.dirname(__FILE__) + "/../src/templates/default")
     }
     OptionParser.new do |opts|
       opts.banner = "Usage: cssdoc [options] [input-dir/input-files]"
@@ -23,6 +24,13 @@ class CSSDocCli
       end
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options[:verbose] = v
+      end
+      opts.on("-t", "--template=name/path", "Specify template or template path") do |name|
+        if File.directory?(name)
+          options[:template_path] = name
+        else
+          options[:template_path] = File.expand_path(File.dirname(__FILE__) + "/../src/templates/#{name}")
+        end
       end
     end.parse!
     options[:input_dir] = ARGV.first if ARGV.first

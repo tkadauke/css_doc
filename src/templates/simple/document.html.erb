@@ -1,0 +1,60 @@
+<h1>Document <%= @document.name %></h1>
+<% if @document.documentation %>
+  <dl>
+    <% if @document.documentation.author %>
+      <dt>Author</dt>
+      <dd><%= @document.documentation.author %></dd>
+    <% end %>
+    <% if @document.documentation.appdef %>
+      <dt>Application</dt>
+      <dd><%= @document.documentation.appdef %></dd>
+    <% end %>
+    <% if @document.documentation.link %>
+      <dt>URL</dt>
+      <dd><%= @document.documentation.link %></dd>
+    <% end %>
+    <% if @document.documentation.copyright %>
+      <dt>Copyright</dt>
+      <dd><%= @document.documentation.copyright %></dd>
+    <% end %>
+    <% if @document.documentation.css_for %>
+      <dt>Compatible browsers</dt>
+      <dd><%= @document.documentation.css_for %></dd>
+    <% end %>
+    <% if @document.documentation.author %>
+      <dt>Version</dt>
+      <dd><%= @document.documentation.author %></dd>
+    <% end %>
+  </dl>
+  
+  <%= @document.documentation.sections.to_html %>
+<% end %>
+
+<h2>Documentation</h2>
+
+<% @document.sections.each do |section| %>
+  <% if section.name %>
+    <h3 class="section" id="section-<%= section.object_id %>"><%= section.name %></h3>
+  <% end %>
+  
+  <%= section.documentation.sections.to_html %>
+  
+  <dl>
+    <% section.rule_sets.each do |rule_set| %>
+      <dt class="rule-set" id="rule-set-<%= rule_set.object_id %>">Rule set <%= rule_set.documentation.name || "(unnamed)" %></dt>
+      <dd>
+        <p><%= rule_set.selector_css %> <%= rule_set.declaration_css %></p>
+
+        <% if rule_set.documentation.formerly %>
+          <p>Formerly: <%= rule_set.documentation.formerly %></p>
+        <% end %>
+      
+        <% if rule_set.documentation.deprecated %>
+          <p>Deprecated: <%= rule_set.documentation.deprecated %></p>
+        <% end %>
+        
+        <%= rule_set.documentation.sections.to_html %>
+      </dd>
+    <% end %>
+  </dl>
+<% end %>

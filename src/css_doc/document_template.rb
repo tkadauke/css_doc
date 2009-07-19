@@ -1,6 +1,7 @@
 module CSSDoc
   class DocumentTemplate < Template
-    def initialize(document)
+    def initialize(document, options = {})
+      super(options)
       @document = document
     end
 

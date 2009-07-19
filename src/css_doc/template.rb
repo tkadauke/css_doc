@@ -2,9 +2,10 @@ require 'erb'
 
 module CSSDoc
   class Template
-    @@template_path = File.dirname(__FILE__) + '/../templates/default'
+    @@default_template_path = File.dirname(__FILE__) + '/../templates/default'
     
-    def initialize
+    def initialize(options = {})
+      @options = options
     end
 
     def render
@@ -16,12 +17,16 @@ module CSSDoc
       
     end
     
+    def template_path
+      @options[:template_path] || @@default_template_path
+    end
+    
     def template
-      File.read("#{@@template_path}/#{template_name}.html.erb")
+      File.read("#{template_path}/#{template_name}.html.erb")
     end
     
     def layout
-      File.read("#{@@template_path}/layout.html.erb")
+      File.read("#{template_path}/layout.html.erb")
     end
     
     def relative_root
