@@ -160,6 +160,7 @@ The command line options are
   -s, --skip=files                 Skip specified files
   -p, --project-name=name          Specify Project name
   -v, --[no-]verbose               Run verbosely
+  -t, --template=name/path         Specify template or template path
 
 You can specifiy the input directory as an optional last parameter. The default is the current directory. For skipped files, a comma-separated list of file names relative to the input directory is expected.
 

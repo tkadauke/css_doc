@@ -46,6 +46,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.title    = gem_name
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README.rdoc')
+  rdoc.rdoc_files.include('TODO.rdoc')
   rdoc.rdoc_files.include('src/**/*.rb')
 end
 
