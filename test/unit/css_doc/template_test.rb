@@ -14,10 +14,6 @@ class CSSDoc::TemplateTest < Test::Unit::TestCase
     template.render('test')
   end
   
-  def test_should_have_no_title
-    assert_nil TestTemplate.new.title
-  end
-  
   def test_should_read_template
     File.expects(:read).with(regexp_matches(/test.html.erb/))
     TestTemplate.new.template('test')

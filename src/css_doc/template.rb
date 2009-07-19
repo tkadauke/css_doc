@@ -20,10 +20,6 @@ module CSSDoc
       ERB.new(layout).result(binding)
     end
     
-    def title
-      
-    end
-    
     def template_path
       @options[:template_path] || @@default_template_path
     end
