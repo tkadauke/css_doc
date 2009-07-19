@@ -110,6 +110,13 @@ p {
 }
 
 /**
+* Use typewriter font for code examples.
+*/
+pre {
+  font-family: Courier;
+}
+
+/**
 * @section Headers
 */
 
