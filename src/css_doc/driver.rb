@@ -67,12 +67,13 @@ module CSSDoc
   private
     def generate(params)
       file_name = params[:file_name] || params[:template]
+      file_name += '.html' unless file_name =~ /\.html$/
       
       relative_root = '.'
       relative_root = (['..'] * File.dirname(file_name).split('/').size).join('/') if file_name =~ /\//
 
-      html = CSSDoc::Template.new(@options).render(params[:template], params[:locals])
-      File.open("#{@options[:output_dir]}/#{file_name}.html", 'w') { |file| file.puts html }
+      html = CSSDoc::Template.new(@options.merge(:relative_root => relative_root)).render(params[:template], params[:locals])
+      File.open("#{@options[:output_dir]}/#{file_name}", 'w') { |file| file.puts html }
     end
   end
 end
