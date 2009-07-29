@@ -11,6 +11,8 @@ class CSSDoc::DocumentDocumentationTest < Test::Unit::TestCase
       * @author John Doe
       * @css-for Good Browsers
       * @version 1.0
+      * @date 2009-10-15
+      * @license Microsoft Shared Source License
     end
     documentation = CSSDoc::DocumentDocumentation.new(comment)
     assert_equal 'something.css', documentation.file
@@ -21,6 +23,8 @@ class CSSDoc::DocumentDocumentationTest < Test::Unit::TestCase
     assert_equal 'John Doe', documentation.author
     assert_equal 'Good Browsers', documentation.css_for
     assert_equal '1.0', documentation.version
+    assert_equal '2009-10-15', documentation.date
+    assert_equal 'Microsoft Shared Source License', documentation.license
   end
   
   def test_should_parse_section_text
