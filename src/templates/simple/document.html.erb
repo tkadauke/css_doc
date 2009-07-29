@@ -25,6 +25,14 @@
       <dt>Version</dt>
       <dd><%= @document.documentation.author %></dd>
     <% end %>
+    <% if @document.documentation.date %>
+      <dt>Date</dt>
+      <dd><%= @document.documentation.date %></dd>
+    <% end %>
+    <% if @document.documentation.license %>
+      <dt>License</dt>
+      <dd><%= @document.documentation.license %></dd>
+    <% end %>
   </dl>
   
   <%= @document.documentation.sections.to_html %>
