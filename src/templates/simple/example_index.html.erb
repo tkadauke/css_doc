@@ -1,0 +1,9 @@
+<h1>Example Index</h1>
+
+<ul class="index">
+  <% Examples.all.each do |example| %>
+    <li>
+      <%= example.to_html %>
+    </li>
+  <% end %>
+</ul>

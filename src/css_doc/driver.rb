@@ -42,6 +42,10 @@ module CSSDoc
 
       generate(:template => 'section_index', :locals => { :collection => @collection, :title => 'Section Index' })
 
+      log "Generating Example Index ..."
+
+      generate(:template => 'example_index', :locals => { :collection => @collection, :title => 'Example Index' })
+
       log "Generating Index Page ..."
 
       generate(:template => 'index', :locals => { :project_name => @options[:project_name], :title => 'Index' })

@@ -102,6 +102,10 @@ module CSSDoc
         end
       end
       sections << section_type.new(section_text)
+      
+      sections.each do |section|
+        Examples.add(section) if section.is_a?(CodeSection)
+      end
     end
   end
 end
