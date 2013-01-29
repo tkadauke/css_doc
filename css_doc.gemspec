@@ -9,6 +9,6 @@ spec = Gem::Specification.new do |s|
   s.bindir        = 'bin'
   s.executables   = ["cssdoc"]
   s.author        = "Thomas Kadauke"
-  s.email         = "thomas.kadauke@imedo.de"
-  s.homepage      = "http://www.imedo.de"
+  s.email         = "thomas.kadauke@googlemail.com"
+  s.homepage      = "https://github.com/tkadauke/css_doc"
 end

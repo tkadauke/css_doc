@@ -1,11 +1,5 @@
 = css_doc
 
-Author::    Thomas Kadauke - tkadauke (at) imedo.de
-Copyright:: Copyright (c) 2009 imedo GmbH
-Licence::   MIT
-Git::       http://github.com/imedo/css_doc
-Bugs::      No dedicated bug tracker yet - Email us or just send pull requests 
-
 css_doc is a Ruby library and command line tool to extract documentation from CSS files. The format of the documentation is very similar to JavaDoc.
 
 css_doc was inspired by the CSSDOC[http://cssdoc.net/] project, but it is NOT a complete implementation of the proposed standard, although it should be fairly compatible. As there is no documentation extractor for the CSSDOC standard, this project should fill the gap for many people.
@@ -20,9 +14,7 @@ css_doc was inspired by the CSSDOC[http://cssdoc.net/] project, but it is NOT a 
 
 == What does it look like?
 
-Here you can find an example of a generated documentation: http://opensource.imedo.de/css_doc/index.html. This is the documentation for the stylesheet[http://opensource.imedo.de/stylesheets/style.css] that we use for our opensource site.
-
-As another Example, consider the famous reset style sheet, documented with css_doc:
+Consider the famous reset style sheet, documented with css_doc:
 
   /**
   * @file reset.css
@@ -113,7 +105,7 @@ As another Example, consider the famous reset style sheet, documented with css_d
 The easiest way to install this gem is directly via the github gem 
 repository:
 
- $ sudo gem install imedo-css_doc -s http://gems.github.com
+ $ sudo gem install css_doc
 
 For css_doc to work, you need the latest version of CSSPool (2.0.0). CSSPool depends on libcroco, which can be installed on OS X via
 
@@ -194,6 +186,6 @@ To define a rake task for css_doc, add the following to your Rakefile:
 
 == Getting it, License and Patches
 
-Get the complete source code through http://github.com/imedo/css_doc. For installation instructions, see above. License is MIT. That means that you can do whatever you want with the software, as long as the copyright statement stays intact. Please be a kind open source citizen, and give back your patches and extensions. Just fork the code on Github, and after you’re done, send us a pull request. Thanks for your help!
+Get the complete source code through http://github.com/tkadauke/css_doc. For installation instructions, see above. License is MIT. That means that you can do whatever you want with the software, as long as the copyright statement stays intact. Please be a kind open source citizen, and give back your patches and extensions. Just fork the code on Github, and after you’re done, send us a pull request. Thanks for your help!
 
-Copyright (C) 2008-2009 imedo GmbH, released under the MIT license
+Copyright (C) 2008-2009 Thomas Kadauke, released under the MIT license
